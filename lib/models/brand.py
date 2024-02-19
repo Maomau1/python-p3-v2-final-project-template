@@ -54,7 +54,7 @@ class Brand:
         brand.save()
         return brand
     
-    def update(self, name, description):
+    def update(self):
         """update a brand instance. name or description"""
         sql = """
             UPDATE brands(
@@ -63,3 +63,15 @@ class Brand:
             )"""
         CURSOR.execute(sql, (self.name, self.description, self.id))
         CONN.commit()
+
+    def delete(self):
+        "delete a brand instance"
+        sql = """
+            DELETE FROM brands
+            WHERE id = ?
+        """
+        CURSOR.execute(sql,(self.id,))
+        CONN.commit()
+        # delete the dictionary entry using the id as the key
+        del type(self).all[self.id]
+        # set the id to None
