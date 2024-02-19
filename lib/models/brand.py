@@ -75,3 +75,19 @@ class Brand:
         # delete the dictionary entry using the id as the key
         del type(self).all[self.id]
         # set the id to None
+
+    @classmethod
+    def instance_from_db(cls,row):
+        """obtain a row/instance from the brands table"""
+        # check the brands dictionary from instance using the row's primary key
+        brand = cls.all.get(row[0])
+        if brand:
+            #ensure attributes match row values in case local instance was modified.
+            brand.name = row[1]
+            brand.description = row[2]
+        else:
+            # not in dictionary, create new instance and add to dictionary
+            brand = cls(row[1], row[2])
+            brand.id = row[0]
+            cls.all[brand.id] = brand
+        return brand
