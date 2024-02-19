@@ -122,4 +122,12 @@ class Brand:
         row = CURSOR.execute(sql, (name)).fetchone()
         return cls.instance_from_db(row) if row else None
     
-    
+    # def products(self):
+    #     """return list of products associated with current brand"""
+    #     from models.product import Product
+    #     sql = """
+    #         SELECT * FROM products
+    #         WHERE brand is ?
+    #     """
+    #     rows = CURSOR.execute(sql, (self.name,)).fetchall()
+    #     return [ Product.instance_from_db(row) for row in rows]
