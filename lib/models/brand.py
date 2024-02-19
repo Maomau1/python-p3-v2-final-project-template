@@ -47,3 +47,7 @@ class Brand:
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id]= self
+
+    @classmethod
+    def create(cls, name, description):
+        pass
