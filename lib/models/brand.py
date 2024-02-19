@@ -98,5 +98,28 @@ class Brand:
         sql = """
             SELECT * FROM brands
         """
-        rows = CURSOR.execute(sql,)
+        rows = CURSOR.execute(sql,).fetchall()
         return [cls.instance_from_db(row) for row in rows]
+    
+    # useless in our case
+    @classmethod
+    def find_by_id(cls, id):
+        """return a brand object corresponding to the tabke row matching the speciifed primary key / id"""
+        sql = """
+            SELECT * FROM brands
+            WHERE id = ?
+        """
+        row = CURSOR.execute(sql,(id,)).fetchone() 
+        return cls.instance_from_db(row) if row else None
+
+    @classmethod
+    def find_by_name(cls, name):
+        """return a brand object corresbonding tot he table row matching the specified name"""
+        sql = """
+            SELECT * FROM brands
+            WHERE name is ?
+        """
+        row = CURSOR.execute(sql, (name)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    
