@@ -91,3 +91,12 @@ class Brand:
             brand.id = row[0]
             cls.all[brand.id] = brand
         return brand
+    
+    @classmethod
+    def get_all(cls):
+        """returns list of all brands"""
+        sql = """
+            SELECT * FROM brands
+        """
+        rows = CURSOR.execute(sql,)
+        return [cls.instance_from_db(row) for row in rows]
