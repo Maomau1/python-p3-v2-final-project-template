@@ -50,4 +50,16 @@ class Brand:
 
     @classmethod
     def create(cls, name, description):
-        pass
+        brand = cls(name, description)
+        brand.save()
+        return brand
+    
+    def update(self, name, description):
+        """update a brand instance. name or description"""
+        sql = """
+            UPDATE brands(
+            SET name = ?, description = ?
+            WHERE id = ?
+            )"""
+        CURSOR.execute(sql, (self.name, self.description, self.id))
+        CONN.commit()
