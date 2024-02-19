@@ -17,4 +17,20 @@ class Product:
     def __repr__(self) -> str:
         return (f'Product: {self.name}, quantity: {self.quantity}')
     
+    @classmethod
+    def create_table(cls):
+        """create a products table"""
+        sql = """
+            CREATE TABLE IF NOT EXIST products(
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            description TEXT,
+            quantity INTEGER,
+            price INTEGER,
+            brand_id INTEGER,
+            FOREIGN KEY (brand_id) REFERENCES brands (id)) 
+        """
+        CURSOR.execute(sql,)
+        CONN.commit()
+
     
