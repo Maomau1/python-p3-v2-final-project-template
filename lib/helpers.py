@@ -71,7 +71,7 @@ def brand_products(name):
     brand = Brand.find_by_name(name)
     products = brand.products()
     if products == []:
-        print(f'No products added')
+        print(f'No products to display!')
     else:
         for product in products:
             print(f'{product}')
@@ -81,9 +81,10 @@ def brand_products(name):
 def add_product():
     name = input("enter product name: ")
     description = input("enter product description: ")
-    quantity = input("enter product quantity: ")
-    price = input("enter product price: ")
+    quantity = int(input("enter product quantity: "))
+    price = int(input("enter product price: "))
     brand = input("enter product brand: ")
-    product = Product.create(name, description,quantity, price,brand)
+    brand_id = Brand.find_by_name(brand).id
+    product = Product.create(name, description,quantity, price, brand_id)
     return product
 

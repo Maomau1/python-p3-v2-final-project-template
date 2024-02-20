@@ -74,15 +74,15 @@ def brands_menu():
     print("     Type e to Exit")
 
 def brands_page():
+    brands_menu()
     while True:
-        brands_menu()
         choice = input("> ")
         if choice == "e":
             exit_program()
         elif choice == "a":
             add_brand()
         elif choice == "v":
-            brand_product_page()
+            brand_page()
         elif choice == "u":
             update_brand()
         elif choice == "d":
@@ -91,11 +91,9 @@ def brands_page():
             helper_1()
         else:
             print("Invalid choice")
-def product_menu():
-    print("--------------------------------")
-    print("Products Page")
-    print("--------------------------------")
-    print("")
+def brand_menu(name):
+    print(f'-------------{name}-------------\n')
+    brand_products(name)
     print("---------------**---------------")
     print("Please choose from the following:")
     print("")
@@ -105,19 +103,34 @@ def product_menu():
     print("     Type d to see the Delete a product")
     print("     Type e to Exit")
 
-def brand_product_page ():
+# product_menu():
+#     print("--------------------------------")
+#     print("Products Page")
+#     print("--------------------------------")
+#     print("")
+#     print("---------------**---------------")
+#     print("Please choose from the following:")
+#     print("")
+#     print("     Type a to see the Add a product")
+#     print("     Type v to see the View a product details")
+#     print("     Type u to see the Update a product")
+#     print("     Type d to see the Delete a product")
+#     print("     Type e to Exit")
+
+def brand_page ():
     print("-----------View Brand-----------\n")
     list_brands()
     print("--------------------------------\n")
     name = name_query()
-    print("--------------------------------\n")
-    brand_products(name)
+    brand_menu(name)
+    product_page()
+
+        
 
 
 
 def product_page():
     while True:
-        product_menu()
         choice = input("> ")
         if choice == "e":
             exit_program()

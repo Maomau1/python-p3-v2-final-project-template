@@ -130,5 +130,6 @@ class Brand:
             WHERE id is ?
         """
         rows = CURSOR.execute(sql, (self.id,)).fetchall()
-        breakpoint()
+        # breakpoint()
         return [ Product.instance_from_db(row) for row in rows]
+    

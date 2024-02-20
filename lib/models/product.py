@@ -4,7 +4,7 @@ from models.brand import Brand
 
 class Product:
 
-    all=[]
+    all={}
 
     def __init__(self, name, description, quantity, price, brand_id, id=None):
         self.id = id
@@ -52,4 +52,21 @@ class Product:
         product.save()
         return product
     
+    @classmethod
+    def instance_from_db(cls, row):
+        """returns a product object having the attribute values from the table row."""
+        product = cls.all.get(row[0])
+        if product:
+            product.name = row[1]
+            product.description = row[2]
+            product.quantity = row[3]
+            product.price = row[4]
+            product.brand_id = row[5]
+        else:
+            product = cls(row[1], row[2], row[3], row[4],row[5])
+            product.id = row[0]
+            cls.all[product.id]= product
+        return product
+
+
      
