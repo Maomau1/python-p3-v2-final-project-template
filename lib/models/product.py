@@ -49,13 +49,14 @@ class Product:
         """delete the attributes of a product instance"""
         sql = """
             DELETE FROM products
-            WHERE brand_id is ?
+            WHERE id is ?
         """
         CURSOR.execute(sql,(self.id,))
         CONN.commit()
-
+        # breakpoint()
         del type(self).all[self.id]
         self.id = None
+        # breakpoint()
 
     @classmethod
     def find_by_id(cls, _id):

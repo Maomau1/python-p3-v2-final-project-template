@@ -62,8 +62,8 @@ def delete_brand():
         print(f'brand: {brand.name} not found!')
 
 # view brand
-def name_query():
-    name = input("enter brand name: ")
+def name_query(item):
+    name = input(f'enter {item} name: ')
     return name
 
 # show brand products
@@ -97,7 +97,7 @@ def add_product():
         print("error generating product",exc)
 
 def delete_product():
-    name = name_query()
+    name = name_query("product")
     if product := Product.find_by_name(name):
         product.delete()
     else:

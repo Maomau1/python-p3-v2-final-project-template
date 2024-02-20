@@ -108,7 +108,7 @@ def brand_page ():
     print("-----------View Brand-----------\n")
     list_brands()
     print("--------------------------------\n")
-    name = name_query()
+    name = name_query("brand")
     product_page(name)
         
 
