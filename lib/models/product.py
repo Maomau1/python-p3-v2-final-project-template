@@ -39,8 +39,15 @@ class Product:
             INSERT INTO products(name, description, quantity, price, brand_id)
             VALUES(?,?,?,?,?)
         """
-        CURSOR.execute(sql,(self.name, self.name, self.description, self.quantity, self.price, self.brand_id))
+        CURSOR.execute(sql,(self.name, self.description, self.quantity, self.price, self.brand_id))
         CONN.commit()
         
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+
+    @classmethod
+    def create(cls, name, description, quantity, price, brand_id):
+        """Initialize a product instance and saves it to the products table"""
+        product = cls(name,description,quantity, price, brand_id)
+        product.save()
+        return product
