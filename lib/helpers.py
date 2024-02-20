@@ -45,3 +45,12 @@ def update_brand():
             print("Error updating brand: ",exc) 
     else: 
         print(f'brand: {name} not found')
+
+# delete brand
+def delete_brand():
+    name = input("enter name of brand to be deleted: ")
+    if brand := Brand.find_by_name(name):
+        brand.delete()
+        print(f'brand: {brand.name} successfully deleted!')
+    else: 
+        print(f'brand: {brand.name} not found!')

@@ -7,6 +7,7 @@ from helpers import (
     initiate_brands,
     add_brand,
     update_brand,
+    delete_brand,
 )
 
 
@@ -79,6 +80,8 @@ def brands_page():
             product_page()
         elif choice == "u":
             update_brand()
+        elif choice == "d":
+            delete_brand()
         elif choice == "1":
             helper_1()
         else:

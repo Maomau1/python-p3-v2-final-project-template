@@ -12,7 +12,7 @@ class Brand:
         self.description = description
 
     def __repr__(self) -> str:
-        return f"{self.id}: {self.name}"
+        return f"{self.id}. {self.name}"
     
     @classmethod
     def create_table(cls):
