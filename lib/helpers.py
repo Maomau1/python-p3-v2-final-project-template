@@ -34,7 +34,7 @@ def add_brand():
     name = input("enter brand's name: ")
     description = input("enter brand's website: ")
     brand = Brand.create(name, description)
-    print(brand)
+    print(f'{brand.name} successfully added')
 
 # update brand
 def update_brand():
