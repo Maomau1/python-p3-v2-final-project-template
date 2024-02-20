@@ -22,3 +22,10 @@ def list_brands():
     else :
         for brand in brands:
             print(brand)
+
+# create brand
+def add_brand():
+    name = input("enter brand's name: ")
+    description = input("enter brand's description: ")
+    brand = Brand.create(name, description)
+    print(brand)
