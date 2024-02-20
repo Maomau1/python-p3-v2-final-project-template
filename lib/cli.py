@@ -10,6 +10,8 @@ from helpers import (
     delete_brand,
     initiate_products,
     add_product,
+    name_query,
+    brand_products,
 )
 
 
@@ -80,7 +82,7 @@ def brands_page():
         elif choice == "a":
             add_brand()
         elif choice == "v":
-            product_page()
+            brand_product_page()
         elif choice == "u":
             update_brand()
         elif choice == "d":
@@ -102,6 +104,16 @@ def product_menu():
     print("     Type u to see the Update a product")
     print("     Type d to see the Delete a product")
     print("     Type e to Exit")
+
+def brand_product_page ():
+    print("-----------View Brand-----------\n")
+    list_brands()
+    print("--------------------------------\n")
+    name = name_query()
+    print("--------------------------------\n")
+    brand_products(name)
+
+
 
 def product_page():
     while True:

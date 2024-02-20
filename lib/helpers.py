@@ -60,6 +60,22 @@ def delete_brand():
         print(f'brand: {brand.name} successfully deleted!')
     else: 
         print(f'brand: {brand.name} not found!')
+
+# view brand
+def name_query():
+    name = input("enter brand name: ")
+    return name
+
+# show brand products
+def brand_products(name):
+    brand = Brand.find_by_name(name)
+    products = brand.products()
+    if products == []:
+        print(f'No products added')
+    else:
+        for product in products:
+            print(f'{product}')
+
     
 # add product
 def add_product():
