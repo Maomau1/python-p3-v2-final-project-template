@@ -26,6 +26,22 @@ def list_brands():
 # create brand
 def add_brand():
     name = input("enter brand's name: ")
-    description = input("enter brand's description: ")
+    description = input("enter brand's website: ")
     brand = Brand.create(name, description)
     print(brand)
+
+# update brand
+def update_brand():
+    name = input("enter name of brand to updated: ")
+    if brand := Brand.find_by_name(name):
+        try:
+           name = input("enter updated name: ")
+           brand.name = name
+           description = input("enter updated website: ")
+           brand.description = description
+           brand.update()
+           print(f'Brand: {brand.name} succesfully updated')
+        except Exception as exc:
+            print("Error updating brand: ",exc) 
+    else: 
+        print(f'brand: {name} not found')

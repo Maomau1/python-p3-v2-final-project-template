@@ -12,7 +12,7 @@ class Brand:
         self.description = description
 
     def __repr__(self) -> str:
-        return f"Brand: {self.name}, specializes in {self.description}"
+        return f"{self.id}: {self.name}"
     
     @classmethod
     def create_table(cls):
@@ -57,10 +57,10 @@ class Brand:
     def update(self):
         """update a brand instance. name or description"""
         sql = """
-            UPDATE brands(
+            UPDATE brands
             SET name = ?, description = ?
             WHERE id = ?
-            )"""
+            """
         CURSOR.execute(sql, (self.name, self.description, self.id))
         CONN.commit()
 
@@ -119,7 +119,7 @@ class Brand:
             SELECT * FROM brands
             WHERE name is ?
         """
-        row = CURSOR.execute(sql, (name)).fetchone()
+        row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
     
     # def products(self):
