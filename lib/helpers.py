@@ -1,5 +1,6 @@
 # lib/helpers.py
 from models.brand import Brand
+from models.product import Product
 
 def helper_1():
     print("Performing useful function#1.")
@@ -14,6 +15,11 @@ def exit_program():
 # create brands table
 def initiate_brands():
     Brand.create_table()
+
+# create products table
+def initiate_products():
+    Product.create_table()
+    
 #list brands
 def list_brands():
     brands = Brand.get_all()
@@ -54,3 +60,14 @@ def delete_brand():
         print(f'brand: {brand.name} successfully deleted!')
     else: 
         print(f'brand: {brand.name} not found!')
+    
+# add product
+def add_product():
+    name = input("enter product name: ")
+    description = input("enter product description: ")
+    quantity = input("enter product quantity: ")
+    price = input("enter product price: ")
+    brand = input("enter product brand: ")
+    product = Product.create(name, description,quantity, price,brand)
+    return product
+

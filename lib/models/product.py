@@ -21,7 +21,7 @@ class Product:
     def create_table(cls):
         """create a products table to persist the attributes of Product instances"""
         sql = """
-            CREATE TABLE IF NOT EXIST products(
+            CREATE TABLE IF NOT EXISTS products(
             id INTEGER PRIMARY KEY,
             name TEXT,
             description TEXT,
@@ -51,3 +51,5 @@ class Product:
         product = cls(name,description,quantity, price, brand_id)
         product.save()
         return product
+    
+     

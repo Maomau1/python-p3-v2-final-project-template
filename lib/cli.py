@@ -8,12 +8,15 @@ from helpers import (
     add_brand,
     update_brand,
     delete_brand,
+    initiate_products,
+    add_product,
 )
 
 
 def main():
     while True:
         initiate_brands()
+        initiate_products()
         home_page()
         choice = input("> ")
         if choice == "e":
@@ -108,6 +111,8 @@ def product_page():
             exit_program()
         elif choice == "b":
             brands_page()
+        elif choice == "a":
+            add_product()
         elif choice == "1":
             helper_1()
         else:
