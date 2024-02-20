@@ -18,7 +18,7 @@ class Brand:
     def create_table(cls):
         """Create a new table to persist the attributes of Brand instances"""
         sql = """
-            CREATE TABLE IF NOT EXIST brands(
+            CREATE TABLE IF NOT EXISTS brands(
             id INTEGER PRIMARY KEY,
             name TEXT,
             description TEXT

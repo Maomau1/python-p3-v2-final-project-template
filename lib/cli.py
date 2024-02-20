@@ -2,12 +2,15 @@
 
 from helpers import (
     exit_program,
-    helper_1
+    helper_1,
+    list_brands,
+    initiate_brands,
 )
 
 
 def main():
     while True:
+        initiate_brands()
         home_page()
         choice = input("> ")
         if choice == "e":
@@ -50,8 +53,10 @@ def home_page():
 
 def brands_menu():
     print("---------------**---------------")
-    print("Brands Page")
-    print("")
+    print("         Brands Page             ")
+    print("--------------------------------\n")
+    list_brands()
+    print("\n--------------------------------")
     print("Please choose from the following:")
     print("")
     print("     Type a to see the Add a brand")
@@ -75,9 +80,11 @@ def brands_page():
         else:
             print("Invalid choice")
 def product_menu():
-    print("---------------**---------------")
+    print("--------------------------------")
     print("Products Page")
+    print("--------------------------------")
     print("")
+    print("---------------**---------------")
     print("Please choose from the following:")
     print("")
     print("     Type a to see the Add a product")
