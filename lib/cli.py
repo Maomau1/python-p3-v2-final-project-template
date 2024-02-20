@@ -14,6 +14,7 @@ from helpers import (
     brand_products,
     delete_product,
     update_product,
+    view_product_details,
 )
 
 
@@ -39,19 +40,6 @@ def home_page():
     print("     Type p to see the Products summary")
     print("     Type e to Exit")
 
-# def main():
-#     while True:
-#         home_page()
-#         choice = input("> ")
-#         if choice == "e":
-#             exit_program()
-#         elif choice == "b":
-#             brands_page()
-#         elif choice == "1":
-#             helper_1()
-#         else:
-#             print("Invalid choice")
-
 
 def menu():
     print("Please select an option:")
@@ -59,19 +47,18 @@ def menu():
     print("1. Some useful function")
 
 
-
 def brands_menu():
     print("---------------**---------------")
     print("         Brands Page             ")
-    print("--------------------------------\n")
+    print("--------------------------------\n") 
     list_brands()
     print("\n--------------------------------")
-    print("Please choose from the following:")
-    print("")
+    print("Please choose from the following:\n")
     print("     Type a to see the Add a brand")
     print("     Type v to see the View a brand details")
     print("     Type u to see the Update a brand")
     print("     Type d to see the Delete a brand")
+    print("     Type m for Main Menu")
     print("     Type e to Exit")
 
 def brands_page():
@@ -80,6 +67,8 @@ def brands_page():
         choice = input("> ")
         if choice == "e":
             exit_program()
+        elif choice == "m":
+            main()
         elif choice == "a":
             add_brand()
         elif choice == "v":
@@ -102,6 +91,7 @@ def brand_menu(name):
     print("     Type v to see the View a product details")
     print("     Type u to see the Update a product")
     print("     Type d to see the Delete a product")
+    print("     Type b for Brands")
     print("     Type e to Exit")
 
 def brand_page ():
@@ -125,6 +115,8 @@ def product_page(name):
             delete_product()
         elif choice == "u":
             update_product()
+        elif choice == "v":
+            view_product_details()
         elif choice == "1":
             helper_1()
         else:
@@ -135,6 +127,18 @@ def product_page(name):
 if __name__ == "__main__":
     main()
 
+# def main():
+#     while True:
+#         home_page()
+#         choice = input("> ")
+#         if choice == "e":
+#             exit_program()
+#         elif choice == "b":
+#             brands_page()
+#         elif choice == "1":
+#             helper_1()
+#         else:
+#             print("Invalid choice")
 
 # def brand_page ():
 #     print("-----------View Brand-----------\n")

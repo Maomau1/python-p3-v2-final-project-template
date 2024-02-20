@@ -14,6 +14,45 @@ class Brand:
     def __repr__(self) -> str:
         return f"{self.id}. {self.name}"
     
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, name):
+        if isinstance(name, str) and len(name):
+            self._name = name
+        else:
+            raise TypeError("name must be a non-empty string")
+        
+    @property
+    def description(self):
+        return self._description
+    
+    @description.setter
+    def description(self, description):
+        if isinstance(description, str) and len(description):
+            self._description = description
+        else:
+            raise TypeError("website must be a non-empty string!")
+
+    # def property_function(attribute,type):
+    #     @property
+    #     def attribute(self):
+    #         return getattr(self, f'_{attribute}')
+        
+    #     @attribute.setter
+    #     def attribute(self, attribute):
+    #         if isinstance(attribute, type) and len(attribute):
+    #             setattr(self,f'_{attribute}', attribute)
+    #         else:
+    #             raise TypeError(f'name must be a non-empty {type}')
+            
+    #     return attribute, attribute.setter
+    
+    # property_function("name",str)
+    # property_function("description",str)
+    
     @classmethod
     def create_table(cls):
         """Create a new table to persist the attributes of Brand instances"""

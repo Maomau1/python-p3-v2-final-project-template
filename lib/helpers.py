@@ -83,7 +83,7 @@ def add_product():
     name = input("enter product name: ")
     description = input("enter product description: ")
     quantity = int(input("enter product quantity: "))
-    price = int(input("enter product price: "))
+    price = int(input("enter product price: $"))
     brand = input("enter product brand: ")
     try:
         brand_id = Brand.find_by_name(brand).id
@@ -112,7 +112,7 @@ def update_product():
         product.description = description
         quantity = input("enter updated product quantity: ")
         product.quantity = quantity
-        price = input("enter updated product price: ")
+        price = input("enter updated product price: $")
         product.price = price
         brand_id = input("enter updated product brand: ")
         product.brand_id = Product.find_by_name(brand_id).id
@@ -120,4 +120,17 @@ def update_product():
         print(f'product {product.name} updated successfully')
     else:
         print(f'product {name} can\'t be found!')
+
+def view_product_details():
+    name = name_query("product")
+    if product := Product.find_by_name(name):
+        print(f'**********{product.name}**********\n',
+                f'- name: {product.name}\n',
+                f'- description: {product.description}\n',
+                f'- quantity: {product.quantity}\n',
+                f'- price: ${product.price}\n',
+                f'- brand: {Brand.find_by_id(product.brand_id).name}\n'
+                )
+    else:
+        print("product not found")
 

@@ -17,6 +17,80 @@ class Product:
     def __repr__(self) -> str:
         return (f'Product: {self.name}, quantity: {self.quantity}')
     
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, name):
+        if isinstance(name, str) and len(name):
+            self._name = name
+        else:
+            raise TypeError("name must be a non-empty string")
+        
+    @property
+    def description(self):
+        return self._description
+    
+    @description.setter
+    def description(self, description):
+        if isinstance(description, str) and len(description):
+            self._description = description
+        else:
+            raise TypeError("description must be a non-empty string")
+        
+    @property
+    def quantity(self):
+        return self._quantity
+    
+    @quantity.setter
+    def quantity(self, quantity):
+        if isinstance(quantity, int) and len(quantity):
+            self._quantity = quantity
+        else:
+            raise TypeError("quantity must be a non-empty string")
+        
+    @property
+    def price(self):
+        return self._price
+    
+    @price.setter
+    def price(self, price):
+        if isinstance(price, int) and len(price):
+            self._price = price
+        else:
+            raise TypeError("price must be a non-empty string")
+        
+    @property
+    def brand(self):
+        return self._brand
+    
+    @brand.setter
+    def brand(self, brand):
+        if isinstance(brand, int) and len(brand):
+            self._brand = brand
+        else:
+            raise TypeError("brand must be a non-empty string")
+        
+    # def property_function(attribute,type):
+    #     @property
+    #     def attribute(self):
+    #         return getattr(self, f'_{attribute}')
+        
+    #     @attribute.setter
+    #     def attribute(self, attribute):
+    #         if isinstance(attribute, type) and len(attribute):
+    #             setattr(self,f'_{attribute}', attribute)
+    #         else:
+    #             raise TypeError(f'name must be a non-empty {type}')
+            
+    #     return attribute, attribute.setter
+
+    # name, name.setter = property_function(name)
+    # description, description.setter = property_function(description)
+    # quantity, quantity.setter = property_function(quantity)
+    # price, price.setter = property_function(price)
+
     @classmethod
     def create_table(cls):
         """create a products table to persist the attributes of Product instances"""
