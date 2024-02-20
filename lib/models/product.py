@@ -58,6 +58,17 @@ class Product:
         self.id = None
         # breakpoint()
 
+    def update(self):
+        """Update the table row corresponding to the current product instance"""
+        sql = """
+            UPDATE products
+            SET name = ?, description = ?, quantity = ?, price = ?, brand_id = ?
+            WHERE id = ?
+            """
+        CURSOR.execute(sql,(self.name, self.description, self.quantity, self.price, self.brand_id, self.id))
+        CONN.commit()
+        
+
     @classmethod
     def find_by_id(cls, _id):
         sql = """

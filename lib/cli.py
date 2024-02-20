@@ -13,6 +13,7 @@ from helpers import (
     name_query,
     brand_products,
     delete_product,
+    update_product,
 )
 
 
@@ -95,9 +96,8 @@ def brands_page():
 def brand_menu(name):
     print(f'-------------{name}-------------\n')
     brand_products(name)
-    print("---------------**---------------")
-    print("Please choose from the following:")
-    print("")
+    print("\n---------------**---------------")
+    print("Please choose from the following:\n")
     print("     Type a to see the Add a product")
     print("     Type v to see the View a product details")
     print("     Type u to see the Update a product")
@@ -107,10 +107,34 @@ def brand_menu(name):
 def brand_page ():
     print("-----------View Brand-----------\n")
     list_brands()
-    print("--------------------------------\n")
+    print("\n--------------------------------\n")
     name = name_query("brand")
     product_page(name)
         
+def product_page(name):
+    while True:
+        brand_menu(name)
+        choice = input("> ")
+        if choice == "e":
+            exit_program()
+        elif choice == "b":
+            brands_page()
+        elif choice == "a":
+            add_product()
+        elif choice == "d":
+            delete_product()
+        elif choice == "u":
+            update_product()
+        elif choice == "1":
+            helper_1()
+        else:
+            print("Product Error:  Invalid choice")
+    
+
+
+if __name__ == "__main__":
+    main()
+
 
 # def brand_page ():
 #     print("-----------View Brand-----------\n")
@@ -133,27 +157,3 @@ def brand_page ():
 #     print("     Type u to see the Update a product")
 #     print("     Type d to see the Delete a product")
 #     print("     Type e to Exit")
-
-
-
-def product_page(name):
-    while True:
-        brand_menu(name)
-        choice = input("> ")
-        if choice == "e":
-            exit_program()
-        elif choice == "b":
-            brands_page()
-        elif choice == "a":
-            add_product()
-        elif choice == "d":
-            delete_product()
-        elif choice == "1":
-            helper_1()
-        else:
-            print("Product Error:  Invalid choice")
-    
-
-
-if __name__ == "__main__":
-    main()

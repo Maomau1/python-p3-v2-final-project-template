@@ -103,3 +103,21 @@ def delete_product():
     else:
         print(f'product: {name} not found!') 
 
+def update_product():
+    name = name_query("product")
+    if product := Product.find_by_name(name):
+        name = input("enter updated product name: ")
+        product.name = name
+        description = input("enter updated product description: ")
+        product.description = description
+        quantity = input("enter updated product quantity: ")
+        product.quantity = quantity
+        price = input("enter updated product price: ")
+        product.price = price
+        brand_id = input("enter updated product brand: ")
+        product.brand_id = Product.find_by_name(brand_id).id
+        product.update()
+        print(f'product {product.name} updated successfully')
+    else:
+        print(f'product {name} can\'t be found!')
+
