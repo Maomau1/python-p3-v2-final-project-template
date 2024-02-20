@@ -45,6 +45,40 @@ class Product:
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
 
+    def delete(self):
+        """delete the attributes of a product instance"""
+        sql = """
+            DELETE FROM products
+            WHERE brand_id is ?
+        """
+        CURSOR.execute(sql,(self.id,))
+        CONN.commit()
+
+        del type(self).all[self.id]
+        self.id = None
+
+    @classmethod
+    def find_by_id(cls, _id):
+        sql = """
+            SELECT * FROM products
+            WHERE brand_id is ?
+        """
+
+        row = CURSOR.execute(sql, (_id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+        
+
+    @classmethod
+    def find_by_name(cls, name):
+        """return instance based on name"""
+        sql ="""
+            SELECT * FROM products
+            WHERE name is ?
+        """
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        CONN.commit()
+        return cls.instance_from_db(row) if row else None
+
     @classmethod
     def create(cls, name, description, quantity, price, brand_id):
         """Initialize a product instance and saves it to the products table"""

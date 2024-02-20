@@ -70,6 +70,7 @@ def name_query():
 def brand_products(name):
     brand = Brand.find_by_name(name)
     products = brand.products()
+    # breakpoint()
     if products == []:
         print(f'No products to display!')
     else:
@@ -84,7 +85,21 @@ def add_product():
     quantity = int(input("enter product quantity: "))
     price = int(input("enter product price: "))
     brand = input("enter product brand: ")
-    brand_id = Brand.find_by_name(brand).id
-    product = Product.create(name, description,quantity, price, brand_id)
-    return product
+    try:
+        brand_id = Brand.find_by_name(brand).id
+    except Exception as exc:
+        print("error obtaining brand",exc)
+    try:
+        product = Product.create(name, description,quantity, price, brand_id)
+        # breakpoint()
+        print(f'product: {product.name} successfully added')
+    except Exception as exc:
+        print("error generating product",exc)
+
+def delete_product():
+    name = name_query()
+    if product := Product.find_by_name(name):
+        product.delete()
+    else:
+        print(f'product: {name} not found!') 
 

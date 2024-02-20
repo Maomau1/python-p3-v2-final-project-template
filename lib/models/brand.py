@@ -127,7 +127,7 @@ class Brand:
         from models.product import Product
         sql = """
             SELECT * FROM products
-            WHERE id is ?
+            WHERE brand_id is ?
         """
         rows = CURSOR.execute(sql, (self.id,)).fetchall()
         # breakpoint()

@@ -12,13 +12,14 @@ from helpers import (
     add_product,
     name_query,
     brand_products,
+    delete_product,
 )
 
 
 def main():
+    initiate_brands()
+    initiate_products()
     while True:
-        initiate_brands()
-        initiate_products()
         home_page()
         choice = input("> ")
         if choice == "e":
@@ -30,6 +31,12 @@ def main():
         else:
             print("Invalid choice")
 
+def home_page():
+    print("Welcome to MR Rose - Inventory App \n")
+    print("Please choose from the following:\n")
+    print("     Type b to see the Brands in store")
+    print("     Type p to see the Products summary")
+    print("     Type e to Exit")
 
 # def main():
 #     while True:
@@ -50,14 +57,7 @@ def menu():
     print("0. Exit the program")
     print("1. Some useful function")
 
-def home_page():
-    print("Welcome to MR Rose - Inventory App")
-    print("")
-    print("Please choose from the following:")
-    print("")
-    print("     Type b to see the Brands in store")
-    print("     Type p to see the Products summary")
-    print("     Type e to Exit")
+
 
 def brands_menu():
     print("---------------**---------------")
@@ -74,8 +74,8 @@ def brands_menu():
     print("     Type e to Exit")
 
 def brands_page():
-    brands_menu()
     while True:
+        brands_menu()
         choice = input("> ")
         if choice == "e":
             exit_program()
@@ -90,7 +90,8 @@ def brands_page():
         elif choice == "1":
             helper_1()
         else:
-            print("Invalid choice")
+            print("brands page Invalid choice")
+
 def brand_menu(name):
     print(f'-------------{name}-------------\n')
     brand_products(name)
@@ -102,6 +103,22 @@ def brand_menu(name):
     print("     Type u to see the Update a product")
     print("     Type d to see the Delete a product")
     print("     Type e to Exit")
+
+def brand_page ():
+    print("-----------View Brand-----------\n")
+    list_brands()
+    print("--------------------------------\n")
+    name = name_query()
+    product_page(name)
+        
+
+# def brand_page ():
+#     print("-----------View Brand-----------\n")
+#     list_brands()
+#     print("--------------------------------\n")
+#     name = name_query()
+#     brand_menu(name)
+#     product_page()
 
 # product_menu():
 #     print("--------------------------------")
@@ -117,20 +134,11 @@ def brand_menu(name):
 #     print("     Type d to see the Delete a product")
 #     print("     Type e to Exit")
 
-def brand_page ():
-    print("-----------View Brand-----------\n")
-    list_brands()
-    print("--------------------------------\n")
-    name = name_query()
-    brand_menu(name)
-    product_page()
-
-        
 
 
-
-def product_page():
+def product_page(name):
     while True:
+        brand_menu(name)
         choice = input("> ")
         if choice == "e":
             exit_program()
@@ -138,10 +146,14 @@ def product_page():
             brands_page()
         elif choice == "a":
             add_product()
+        elif choice == "d":
+            delete_product()
         elif choice == "1":
             helper_1()
         else:
-            print("Invalid choice")
+            print("Product Error:  Invalid choice")
+    
+
 
 if __name__ == "__main__":
     main()
