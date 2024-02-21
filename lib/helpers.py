@@ -14,7 +14,8 @@ def exit_program():
 
 def clear_input_area():
     # Clear the input area in the CLI
-    os.system('cls' if os.name == 'nt' else 'clear')
+    # os.system('cls' if os.name == 'nt' else 'clear')
+    pass
 
 # implement brand functions
 
@@ -69,82 +70,83 @@ def delete_brand():
     else: 
         print(f'brand: {brand.name} not found!')
 
-# view brand
-def name_query(item):
-    name = input(f'enter {item} name: ')
-    return name
+# get brand instance
+def brand_instance(number):
+    index = number -1
+    brand = Brand.get_all()[index]
+    # breakpoint()
+    return brand
+
+#get product instance
+def product_instance(number):
+    index = number - 1
+    product = Product.get_all()[index]
+    return product
+
+# view brand number
+def item_query(item):
+    number = int(input(f'enter {item} number: '))
+    return number
 
 # show brand products
-def brand_products(name):
-    if brand := Brand.find_by_name(name):
-        products = brand.products()
-        # breakpoint()
-        if products == []:
-            print(f'No products to display!')
-        else:
-            for product in products:
-                print(f'{products.index(product)+1}. {product.name}')
+def brand_products(number):
+    # breakpoint()
+    brand = brand_instance(number)
+    products = brand.products()
+    # breakpoint()
+    if products == []:
+        print(f'No products to display!')
     else:
-        print("brand not found")
+        for product in products:
+            print(f'{products.index(product)+1}. {product.name}')
+
+# def view_brand_page ():
+#     brand_number = item_query("brand")
+#     brand = brand_instance(brand_number)
+#     brand_menu(brand)
 
     
 # add product
-def add_product():
+def add_product(brand):
     name = input("enter product name: ")
     description = input("enter product description: ")
     quantity = int(input("enter product quantity: "))
     price = int(input("enter product price: $"))
-    brand = input("enter product brand: ")
-    try:
-        brand_id = Brand.find_by_name(brand).id
-    except Exception as exc:
-        print("error obtaining brand",exc)
-    try:
-        product = Product.create(name, description,quantity, price, brand_id)
-        # breakpoint()
-        print(f'product: {product.name} successfully added')
-    except Exception as exc:
-        print("error generating product",exc)
+    brand_id = brand.id
+    product = Product.create(name, description,quantity, price, brand_id)
+    # breakpoint()
+    print(f'product: {product.name} successfully added')
 
 def delete_product():
-    name = name_query("product")
-    if product := Product.find_by_name(name):
-        product.delete()
-    else:
-        print(f'product: {name} not found!') 
+    number = item_query("product")
+    product = product_instance(number)
+    product.delete()
+    print("product successfully deleted")
 
 def update_product():
-    name = name_query("product")
-    if product := Product.find_by_name(name):
-        name = input("enter updated product name: ")
-        product.name = name
-        description = input("enter updated product description: ")
-        product.description = description
-        quantity = int(input("enter updated product quantity: "))
-        product.quantity = quantity
-        price = int(input("enter updated product price: $"))
-        product.price = price
-        brand = input("enter updated product brand: ")
-        breakpoint()
-        product.brand_id = Brand.find_by_name(brand).id
-        
+    number = item_query("product")
+    product = product_instance(number)
+    try:
+        product.name = input("updated name: ")
+        product.description = input("updated description: ")
+        product.quantity = int(input("updated quantity: "))
+        product.price = int(input("updated price: $"))
         product.update()
-        print(f'product {product.name} updated successfully')
-    else:
-        print(f'product {name} can\'t be found!')
+        print("product updated")
+    except:
+        print("product not updated")
+    
 
 def view_product_details():
-    name = name_query("product")
-    if product := Product.find_by_name(name):
-        print(f'**********{product.name}**********\n',
-                f'- name: {product.name}\n',
-                f'- description: {product.description}\n',
-                f'- quantity: {product.quantity}\n',
-                f'- price: ${product.price}\n',
-                f'- brand: {Brand.find_by_id(product.brand_id).name}\n'
-                )
-    else:
-        print("product not found")
+    number = item_query("product")
+    product = product_instance(number)
+    print(f'**********{product.name}**********\n',
+            f'- name: {product.name}\n',
+            f'- description: {product.description}\n',
+            f'- quantity: {product.quantity}\n',
+            f'- price: ${product.price}\n',
+            f'- brand: {Brand.find_by_id(product.brand_id).name}\n'
+            )
 
 def view_product_summary():
     print("-----        product summary     -----")

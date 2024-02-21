@@ -6,16 +6,16 @@ class Product:
 
     all={}
 
-    def __init__(self, name, description, quantity, price, brand_id, id=None):
-        self.id = id
+    def __init__(self, name, description, quantity, price, brand_id):
+        self.id = None
         self.name = name
         self.description = description
         self.quantity = quantity
         self.price = price
         self.brand_id = brand_id
 
-    def __repr__(self) -> str:
-        return (f'{self.id}. {self.name} | quantity: {self.quantity}')
+    # def __repr__(self) -> str:
+    #     return (f'{self.id}. {self.name} | quantity: {self.quantity}')
     
     @property
     def name(self):
@@ -71,25 +71,6 @@ class Product:
             self._brand = brand
         else:
             raise TypeError("brand must be a non-empty string")
-        
-    # def property_function(attribute,type):
-    #     @property
-    #     def attribute(self):
-    #         return getattr(self, f'_{attribute}')
-        
-    #     @attribute.setter
-    #     def attribute(self, attribute):
-    #         if isinstance(attribute, type) and len(attribute):
-    #             setattr(self,f'_{attribute}', attribute)
-    #         else:
-    #             raise TypeError(f'name must be a non-empty {type}')
-            
-    #     return attribute, attribute.setter
-
-    # name, name.setter = property_function(name)
-    # description, description.setter = property_function(description)
-    # quantity, quantity.setter = property_function(quantity)
-    # price, price.setter = property_function(price)
 
     @classmethod
     def create_table(cls):
@@ -142,6 +123,14 @@ class Product:
         CURSOR.execute(sql,(self.name, self.description, self.quantity, self.price, self.brand_id, self.id))
         CONN.commit()
         
+    @classmethod
+    def drop_table(cls):
+        """Drop products table """
+        sql = """
+            DROP TABLE IF EXISTS products;
+        """
+        CURSOR.execute(sql,)
+        CONN.commit()
 
     @classmethod
     def find_by_id(cls, _id):
@@ -153,7 +142,6 @@ class Product:
         row = CURSOR.execute(sql, (_id,)).fetchone()
         return cls.instance_from_db(row) if row else None
         
-
     @classmethod
     def find_by_name(cls, name):
         """return instance based on name"""

@@ -10,19 +10,21 @@ from helpers import (
     delete_brand,
     initiate_products,
     add_product,
-    name_query,
+    item_query,
     brand_products,
     delete_product,
     update_product,
     view_product_details,
     view_product_summary,
     clear_input_area,
+    product_instance,
+    brand_instance,
 )
 
 
 def main():
-    initiate_brands()
-    initiate_products()
+    # initiate_brands()
+    # initiate_products()
     clear_input_area()
     while True:
         home_page()
@@ -33,8 +35,6 @@ def main():
             brands_page()
         elif choice == "p":
             product_summary_page()
-        elif choice == "1":
-            helper_1()
         else:
             print("Invalid choice")
 
@@ -62,10 +62,10 @@ def brands_menu():
     list_brands()
     print("\n--------------------------------")
     print("Please choose from the following:\n")
-    print("     Type a to see the Add a brand")
-    print("     Type v to see the View a brand details")
-    print("     Type u to see the Update a brand")
-    print("     Type d to see the Delete a brand")
+    print("     Type a to Add a brand")
+    print("     Type v to View a brand details")
+    print("     Type u to Update a brand")
+    print("     Type d to Delete a brand")
     print("     Type m for Main Menu")
     print("     Type e to Exit")
 
@@ -86,33 +86,50 @@ def brands_page():
             update_brand()
         elif choice == "d":
             delete_brand()
-        elif choice == "1":
-            helper_1()
         else:
             print("brands page Invalid choice")
 
-def brand_menu(name):
+def brand_menu(brand_number, brand):
     clear_input_area()
     print("      *******************        ")
-    print(f'---------   {name}  -----------\n')
-    brand_products(name)
+    print(f'---------   {brand.name}  -----------\n')
+    brand_products(brand_number)
     print("\n---------------**---------------")
     print("Please choose from the following:\n")
-    print("     Type a to see the Add a product")
-    print("     Type v to see the View a product details")
-    print("     Type u to see the Update a product")
-    print("     Type d to see the Delete a product")
+    print("     Type a to Add a product")
+    print("     Type v to View a product details")
+    print("     Type u to Update a product")
+    print("     Type d to Delete a product")
     print("     Type b for Brands")
     print("     Type e to Exit")
 
 def brand_page ():
-    # print("      *******************        ")
-    # print("-----------View Brand-----------\n")
-    # list_brands()
-    # print("\n--------------------------------\n")
-    name = name_query("brand")
-    product_page(name)
+    brand_number = item_query("brand")
+    brand = brand_instance(brand_number)
+    product_page(brand_number, brand)
 
+
+def product_page(brand_number, brand):
+    brand_menu(brand_number, brand)
+    while True:
+        choice = input("> ")
+        if choice == "e":
+            exit_program()
+        elif choice == "b":
+            brand_menu(brand_number, brand)
+        elif choice == "a":
+            add_product(brand)
+        elif choice == "d":
+            delete_product()
+        elif choice == "u":
+            update_product()
+        elif choice == "v":
+            view_product_details()
+            print(f'     Type b to go back to {brand.name}')
+            print("     Type e to Exit")
+        else:
+            print("Product Error:  Invalid choice")
+    
 def product_summary_page():
     clear_input_area()
     while True:
@@ -128,64 +145,5 @@ def product_summary_page():
         else:
             print("Product Error:  Invalid choice")
 
-        
-def product_page(name):
-    while True:
-        brand_menu(name)
-        choice = input("> ")
-        if choice == "e":
-            exit_program()
-        elif choice == "b":
-            brands_page()
-        elif choice == "a":
-            add_product()
-        elif choice == "d":
-            delete_product()
-        elif choice == "u":
-            update_product()
-        elif choice == "v":
-            view_product_details()
-        elif choice == "1":
-            helper_1()
-        else:
-            print("Product Error:  Invalid choice")
-    
-
-
 if __name__ == "__main__":
     main()
-
-# def main():
-#     while True:
-#         home_page()
-#         choice = input("> ")
-#         if choice == "e":
-#             exit_program()
-#         elif choice == "b":
-#             brands_page()
-#         elif choice == "1":
-#             helper_1()
-#         else:
-#             print("Invalid choice")
-
-# def brand_page ():
-#     print("-----------View Brand-----------\n")
-#     list_brands()
-#     print("--------------------------------\n")
-#     name = name_query()
-#     brand_menu(name)
-#     product_page()
-
-# product_menu():
-#     print("--------------------------------")
-#     print("Products Page")
-#     print("--------------------------------")
-#     print("")
-#     print("---------------**---------------")
-#     print("Please choose from the following:")
-#     print("")
-#     print("     Type a to see the Add a product")
-#     print("     Type v to see the View a product details")
-#     print("     Type u to see the Update a product")
-#     print("     Type d to see the Delete a product")
-#     print("     Type e to Exit")

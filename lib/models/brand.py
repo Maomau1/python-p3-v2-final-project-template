@@ -6,13 +6,13 @@ class Brand:
     # Dictionnary of brand objects saved to the database.
     all = {}
 
-    def __init__(self, name, description, id= None):
-        self.id = id
+    def __init__(self, name, description):
+        self.id = None
         self.name = name
         self.description = description
 
-    def __repr__(self) -> str:
-        return f'{self.id}. {self.name}'
+    # def __repr__(self) -> str:
+    #     return f'{self.id}. {self.name}'
     
     @property
     def name(self):
@@ -55,7 +55,7 @@ class Brand:
     def drop_table(cls):
         """ Drop the table that persists Brand instances """
         sql = """
-            DROP IF EXISTS TABLE brands;
+            DROP TABLE IF EXISTS brands;
         """
         CURSOR.execute(sql,)
         CONN.commit()
