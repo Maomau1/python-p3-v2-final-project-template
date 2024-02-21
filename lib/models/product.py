@@ -15,7 +15,7 @@ class Product:
         self.brand_id = brand_id
 
     def __repr__(self) -> str:
-        return (f'Product: {self.name}, quantity: {self.quantity}')
+        return (f'{self.id}. {self.name} | quantity: {self.quantity}')
     
     @property
     def name(self):
@@ -45,10 +45,10 @@ class Product:
     
     @quantity.setter
     def quantity(self, quantity):
-        if isinstance(quantity, int) and len(quantity):
+        if isinstance(quantity, int):
             self._quantity = quantity
         else:
-            raise TypeError("quantity must be a non-empty string")
+            raise TypeError("quantity must be an integer")
         
     @property
     def price(self):
@@ -56,7 +56,7 @@ class Product:
     
     @price.setter
     def price(self, price):
-        if isinstance(price, int) and len(price):
+        if isinstance(price, int):
             self._price = price
         else:
             raise TypeError("price must be a non-empty string")
@@ -187,6 +187,14 @@ class Product:
             product.id = row[0]
             cls.all[product.id]= product
         return product
-
-
+    
+    @classmethod
+    def get_all(cls):
+        """retrieves all the product instances"""
+        sql = """
+            SELECT * FROM products
+            """
+        rows = CURSOR.execute(sql).fetchall()
+        CONN.commit()
+        return [Product.instance_from_db(row) for row in rows]
      

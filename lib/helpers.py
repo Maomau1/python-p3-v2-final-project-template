@@ -110,12 +110,14 @@ def update_product():
         product.name = name
         description = input("enter updated product description: ")
         product.description = description
-        quantity = input("enter updated product quantity: ")
+        quantity = int(input("enter updated product quantity: "))
         product.quantity = quantity
-        price = input("enter updated product price: $")
+        price = int(input("enter updated product price: $"))
         product.price = price
-        brand_id = input("enter updated product brand: ")
-        product.brand_id = Product.find_by_name(brand_id).id
+        brand = input("enter updated product brand: ")
+        breakpoint()
+        product.brand_id = Brand.find_by_name(brand).id
+        
         product.update()
         print(f'product {product.name} updated successfully')
     else:
@@ -133,4 +135,9 @@ def view_product_details():
                 )
     else:
         print("product not found")
+
+def view_product_summary():
+    print("")
+    for product in Product.get_all():
+        print(product)
 
