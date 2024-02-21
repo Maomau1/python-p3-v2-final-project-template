@@ -2,6 +2,7 @@
 from models.brand import Brand
 from models.product import Product
 from prettytable import PrettyTable
+import os
 
 def helper_1():
     print("Performing useful function#1.")
@@ -10,6 +11,10 @@ def helper_1():
 def exit_program():
     print("Goodbye!")
     exit()
+
+def clear_input_area():
+    # Clear the input area in the CLI
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # implement brand functions
 
@@ -28,7 +33,7 @@ def list_brands():
         print("No brand entered yet. use menu below to register a brand")
     else :
         for brand in brands:
-            print(brand)
+            print(f'{brands.index(brand)+1}. {brand.name}')
 
 # create brand
 def add_brand():
@@ -78,7 +83,7 @@ def brand_products(name):
             print(f'No products to display!')
         else:
             for product in products:
-                print(f'{product}')
+                print(f'{products.index(product)+1}. {product.name}')
     else:
         print("brand not found")
 

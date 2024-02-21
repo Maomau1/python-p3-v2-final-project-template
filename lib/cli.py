@@ -16,12 +16,14 @@ from helpers import (
     update_product,
     view_product_details,
     view_product_summary,
+    clear_input_area,
 )
 
 
 def main():
     initiate_brands()
     initiate_products()
+    clear_input_area()
     while True:
         home_page()
         choice = input("> ")
@@ -37,6 +39,7 @@ def main():
             print("Invalid choice")
 
 def home_page():
+    clear_input_area()
     print("********************************************")
     print("*    Welcome to MR Rose - Inventory App    *")
     print("********************************************")
@@ -53,6 +56,7 @@ def menu():
 
 
 def brands_menu():
+    clear_input_area()
     print("      *******************        ")
     print("------    Brands Page    -------\n") 
     list_brands()
@@ -64,6 +68,7 @@ def brands_menu():
     print("     Type d to see the Delete a brand")
     print("     Type m for Main Menu")
     print("     Type e to Exit")
+
 
 def brands_page():
     while True:
@@ -87,6 +92,7 @@ def brands_page():
             print("brands page Invalid choice")
 
 def brand_menu(name):
+    clear_input_area()
     print("      *******************        ")
     print(f'---------   {name}  -----------\n')
     brand_products(name)
@@ -108,6 +114,7 @@ def brand_page ():
     product_page(name)
 
 def product_summary_page():
+    clear_input_area()
     while True:
         view_product_summary()
         print("Please choose from the following:\n")
