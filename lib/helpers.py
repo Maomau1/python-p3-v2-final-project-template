@@ -14,8 +14,8 @@ def exit_program():
 
 def clear_input_area():
     # Clear the input area in the CLI
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    pass
+    os.system('cls' if os.name == 'nt' else 'clear')
+    
 
 # implement brand functions
 
@@ -78,9 +78,9 @@ def brand_instance(number):
     return brand
 
 #get product instance
-def product_instance(number):
+def product_instance(number,brand):
     index = number - 1
-    product = Product.get_all()[index]
+    product = brand.products()[index]
     return product
 
 # view brand number
@@ -100,11 +100,6 @@ def brand_products(number):
         for product in products:
             print(f'{products.index(product)+1}. {product.name}')
 
-# def view_brand_page ():
-#     brand_number = item_query("brand")
-#     brand = brand_instance(brand_number)
-#     brand_menu(brand)
-
     
 # add product
 def add_product(brand):
@@ -117,36 +112,39 @@ def add_product(brand):
     # breakpoint()
     print(f'product: {product.name} successfully added')
 
-def delete_product():
+def delete_product(brand):
     number = item_query("product")
-    product = product_instance(number)
+    product = product_instance(number, brand)
+    breakpoint()
     product.delete()
     print("product successfully deleted")
 
-def update_product():
+def update_product(brand):
     number = item_query("product")
-    product = product_instance(number)
+    product = product_instance(number,brand)
+    breakpoint()
     try:
         product.name = input("updated name: ")
         product.description = input("updated description: ")
         product.quantity = int(input("updated quantity: "))
         product.price = int(input("updated price: $"))
         product.update()
+        breakpoint()
         print("product updated")
     except:
         print("product not updated")
     
 
-def view_product_details():
+def view_product_details(brand):
     number = item_query("product")
-    product = product_instance(number)
+    product = product_instance(number, brand)
     print(f'**********{product.name}**********\n',
             f'- name: {product.name}\n',
             f'- description: {product.description}\n',
             f'- quantity: {product.quantity}\n',
             f'- price: ${product.price}\n',
             f'- brand: {Brand.find_by_id(product.brand_id).name}\n'
-            )
+            "----------------------------------")
 
 def view_product_summary():
     print("-----        product summary     -----")

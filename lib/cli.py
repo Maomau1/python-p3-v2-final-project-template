@@ -115,20 +115,29 @@ def product_page(brand_number, brand):
         choice = input("> ")
         if choice == "e":
             exit_program()
-        elif choice == "b":
+        elif choice == "p":
             brand_menu(brand_number, brand)
+        elif choice == "b":
+            brands_page()
         elif choice == "a":
             add_product(brand)
+            product_mini_menu(brand)
         elif choice == "d":
-            delete_product()
+            delete_product(brand)
+            product_mini_menu(brand)
         elif choice == "u":
-            update_product()
+            update_product(brand)
+            product_mini_menu(brand)
         elif choice == "v":
-            view_product_details()
-            print(f'     Type b to go back to {brand.name}')
-            print("     Type e to Exit")
+            view_product_details(brand)
+            product_mini_menu(brand)
         else:
             print("Product Error:  Invalid choice")
+            product_mini_menu(brand)
+        
+def product_mini_menu(brand):
+    print(f'     Type p to go back to {brand.name} products page')
+    print("     Type e to Exit")
     
 def product_summary_page():
     clear_input_area()
