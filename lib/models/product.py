@@ -67,7 +67,7 @@ class Product:
     
     @brand.setter
     def brand(self, brand):
-        if isinstance(brand, int) and len(brand):
+        if isinstance(brand, str) and len(brand):
             self._brand = brand
         else:
             raise TypeError("brand must be a non-empty string")

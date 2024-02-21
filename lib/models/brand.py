@@ -12,7 +12,7 @@ class Brand:
         self.description = description
 
     def __repr__(self) -> str:
-        return f"{self.id}. {self.name}"
+        return f'{self.id}. {self.name}'
     
     @property
     def name(self):
@@ -36,22 +36,6 @@ class Brand:
         else:
             raise TypeError("website must be a non-empty string!")
 
-    # def property_function(attribute,type):
-    #     @property
-    #     def attribute(self):
-    #         return getattr(self, f'_{attribute}')
-        
-    #     @attribute.setter
-    #     def attribute(self, attribute):
-    #         if isinstance(attribute, type) and len(attribute):
-    #             setattr(self,f'_{attribute}', attribute)
-    #         else:
-    #             raise TypeError(f'name must be a non-empty {type}')
-            
-    #     return attribute, attribute.setter
-    
-    # property_function("name",str)
-    # property_function("description",str)
     
     @classmethod
     def create_table(cls):
@@ -71,7 +55,7 @@ class Brand:
     def drop_table(cls):
         """ Drop the table that persists Brand instances """
         sql = """
-            DROP IF EXIST TABLE brands;
+            DROP IF EXISTS TABLE brands;
         """
         CURSOR.execute(sql,)
         CONN.commit()
@@ -172,3 +156,20 @@ class Brand:
         # breakpoint()
         return [ Product.instance_from_db(row) for row in rows]
     
+    
+    # def property_function(attribute,type):
+    #     @property
+    #     def attribute(self):
+    #         return getattr(self, f'_{attribute}')
+        
+    #     @attribute.setter
+    #     def attribute(self, attribute):
+    #         if isinstance(attribute, type) and len(attribute):
+    #             setattr(self,f'_{attribute}', attribute)
+    #         else:
+    #             raise TypeError(f'name must be a non-empty {type}')
+            
+    #     return attribute, attribute.setter
+    
+    # property_function("name",str)
+    # property_function("description",str)

@@ -1,6 +1,7 @@
 # lib/helpers.py
 from models.brand import Brand
 from models.product import Product
+from prettytable import PrettyTable
 
 def helper_1():
     print("Performing useful function#1.")
@@ -33,8 +34,10 @@ def list_brands():
 def add_brand():
     name = input("enter brand's name: ")
     description = input("enter brand's website: ")
-    brand = Brand.create(name, description)
-    print(f'{brand.name} successfully added')
+    if brand := Brand.create(name, description):
+        print(f'{brand.name} successfully added')
+    else:
+        print("brand does not exist")
 
 # update brand
 def update_brand():
@@ -56,8 +59,8 @@ def update_brand():
 def delete_brand():
     name = input("enter name of brand to be deleted: ")
     if brand := Brand.find_by_name(name):
-        brand.delete()
         print(f'brand: {brand.name} successfully deleted!')
+        brand.delete()    
     else: 
         print(f'brand: {brand.name} not found!')
 
@@ -68,14 +71,16 @@ def name_query(item):
 
 # show brand products
 def brand_products(name):
-    brand = Brand.find_by_name(name)
-    products = brand.products()
-    # breakpoint()
-    if products == []:
-        print(f'No products to display!')
+    if brand := Brand.find_by_name(name):
+        products = brand.products()
+        # breakpoint()
+        if products == []:
+            print(f'No products to display!')
+        else:
+            for product in products:
+                print(f'{product}')
     else:
-        for product in products:
-            print(f'{product}')
+        print("brand not found")
 
     
 # add product
@@ -137,7 +142,10 @@ def view_product_details():
         print("product not found")
 
 def view_product_summary():
-    print("")
+    print("-----        product summary     -----")
+    table = PrettyTable(['product', 'quantity', 'price', 'brand'])
     for product in Product.get_all():
-        print(product)
+        # breakpoint()
+        table.add_row([product.name, product.quantity, product.price, Brand.find_by_id(product.brand_id).name])
+    print(table)
 

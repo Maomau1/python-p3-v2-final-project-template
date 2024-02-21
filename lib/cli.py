@@ -30,7 +30,7 @@ def main():
         elif choice == "b":
             brands_page()
         elif choice == "p":
-            view_product_summary()
+            product_summary_page()
         elif choice == "1":
             helper_1()
         else:
@@ -46,7 +46,6 @@ def home_page():
     print("     Type e to Exit                     ")
     print("--------------------------------------------")
     
-
 def menu():
     print("Please select an option:")
     print("0. Exit the program")
@@ -107,6 +106,21 @@ def brand_page ():
     # print("\n--------------------------------\n")
     name = name_query("brand")
     product_page(name)
+
+def product_summary_page():
+    while True:
+        view_product_summary()
+        print("Please choose from the following:\n")
+        print("     Type m for Main Menu")
+        print("     Type e to Exit")
+        choice = input("> ")
+        if choice == "m":
+            main()
+        elif choice == "e":
+            exit()
+        else:
+            print("Product Error:  Invalid choice")
+
         
 def product_page(name):
     while True:
