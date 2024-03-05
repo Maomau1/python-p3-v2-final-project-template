@@ -108,7 +108,7 @@ class Product:
         """
         CURSOR.execute(sql,(self.id,))
         CONN.commit()
-        breakpoint()
+        # breakpoint()
         del type(self).all[self.id]
         self.id = None
         # breakpoint()

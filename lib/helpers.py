@@ -63,12 +63,9 @@ def update_brand():
 
 # delete brand
 def delete_brand():
-    name = input("enter name of brand to be deleted: ")
-    if brand := Brand.find_by_name(name):
-        print(f'brand: {brand.name} successfully deleted!')
-        brand.delete()    
-    else: 
-        print(f'brand: {brand.name} not found!')
+    number = item_query("brand")
+    brand = brand_instance(number)
+    brand.delete()    
 
 # get brand instance
 def brand_instance(number):
@@ -115,14 +112,14 @@ def add_product(brand):
 def delete_product(brand):
     number = item_query("product")
     product = product_instance(number, brand)
-    breakpoint()
+    # breakpoint()
     product.delete()
     print("product successfully deleted")
 
 def update_product(brand):
     number = item_query("product")
     product = product_instance(number,brand)
-    breakpoint()
+    # breakpoint()
     try:
         product.name = input("updated name: ")
         product.description = input("updated description: ")
@@ -138,6 +135,7 @@ def update_product(brand):
 def view_product_details(brand):
     number = item_query("product")
     product = product_instance(number, brand)
+    clear_input_area()
     print(f'**********{product.name}**********\n',
             f'- name: {product.name}\n',
             f'- description: {product.description}\n',
@@ -151,6 +149,6 @@ def view_product_summary():
     table = PrettyTable(['product', 'quantity', 'price', 'brand'])
     for product in Product.get_all():
         # breakpoint()
-        table.add_row([product.name, product.quantity, product.price, Brand.find_by_id(product.brand_id).name])
+        table.add_row([product.name, product.quantity, f'${product.price}', Brand.find_by_id(product.brand_id).name])
     print(table)
 

@@ -90,7 +90,7 @@ def brands_page():
             print("brands page Invalid choice")
 
 def brand_menu(brand_number, brand):
-    clear_input_area()
+    
     print("      *******************        ")
     print(f'---------   {brand.name}  -----------\n')
     brand_products(brand_number)
@@ -106,16 +106,18 @@ def brand_menu(brand_number, brand):
 def brand_page ():
     brand_number = item_query("brand")
     brand = brand_instance(brand_number)
+    clear_input_area()
     product_page(brand_number, brand)
 
 
 def product_page(brand_number, brand):
     brand_menu(brand_number, brand)
-    while True:
+    while True:    
         choice = input("> ")
         if choice == "e":
             exit_program()
         elif choice == "p":
+            clear_input_area()
             brand_menu(brand_number, brand)
         elif choice == "b":
             brands_page()
