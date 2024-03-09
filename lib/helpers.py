@@ -88,6 +88,12 @@ def item_query(item):
                 print("incorrect number, please try again")
                 number = int(input(f'enter {item} number: '))
             return number
+    elif item == "product":
+            number = int(input(f'enter {item} number: '))
+            while number > len(Product.get_all()): 
+                print("incorrect number, please try again")
+                number = int(input(f'enter {item} number: '))
+            return number
             
 
 # show brand products
