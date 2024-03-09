@@ -82,8 +82,13 @@ def product_instance(number,brand):
 
 # view brand number
 def item_query(item):
-    number = int(input(f'enter {item} number: '))
-    return number
+    if item == "brand":
+            number = int(input(f'enter {item} number: '))
+            while number > len(Brand.get_all()): 
+                print("incorrect number, please try again")
+                number = int(input(f'enter {item} number: '))
+            return number
+            
 
 # show brand products
 def brand_products(number):
