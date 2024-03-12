@@ -63,43 +63,67 @@ def update_brand():
 
 # delete brand
 def delete_brand():
-    number = item_query("brand")
-    brand = brand_instance(number)
+    brand = brand_instance()
     brand.delete()    
 
 # get brand instance
-def brand_instance(number):
-    index = number -1
-    brand = Brand.get_all()[index]
-    # breakpoint()
-    return brand
+def brand_instance():
+    while True:
+        try:
+            number = int(input(f'enter brand number: '))
+            if number > len(Brand.get_all()) or number <1: 
+                print("incorrect number, please try again")
+            else:
+                number = number
+                index = number -1
+                brand = Brand.get_all()[index]
+                # breakpoint()
+                return brand
+        except ValueError:
+            print("Invalid input, please input valid integer")
 
 #get product instance
-def product_instance(number,brand):
-    index = number - 1
-    product = brand.products()[index]
-    return product
+def product_instance(brand):
+       while True:
+            try:
+                number = int(input(f'enter product number: '))
+                if number > len(brand.products()) or number < 1:
+                    print("Incorrect number, please try again")
+                else:
+                    number= number
+                    index = number - 1
+                    product = brand.products()[index]
+                    return product
+            except ValueError:
+                print("Invalid input, please enter a valid integer")
+         
 
 # view brand number
 def item_query(item):
     if item == "brand":
-            number = int(input(f'enter {item} number: '))
-            while number > len(Brand.get_all()): 
-                print("incorrect number, please try again")
+        while True:
+            try:
                 number = int(input(f'enter {item} number: '))
-            return number
-    elif item == "product":
-            number = int(input(f'enter {item} number: '))
-            while number > len(Product.get_all()): 
-                print("incorrect number, please try again")
-                number = int(input(f'enter {item} number: '))
-            return number
-            
+                if number > len(Brand.get_all()) or number <1 or not isinstance(number, int): 
+                    print("incorrect number, please try again")
+                else:
+                    return number
+            except ValueError:
+                print("Invalid input, please enter a valid integer")
 
+    elif item == "product":
+        while True:
+            try:
+                number = int(input(f'Enter {item} number: '))
+                if number > len(Product.get_all()) or number < 1:
+                    print("Incorrect number, please try again")
+                else:
+                    return number
+            except ValueError:
+                print("Invalid input, please enter a valid integer")
 # show brand products
-def brand_products(number):
+def brand_products(brand):
     # breakpoint()
-    brand = brand_instance(number)
     products = brand.products()
     # breakpoint()
     if products == []:
@@ -121,15 +145,13 @@ def add_product(brand):
     print(f'product: {product.name} successfully added')
 
 def delete_product(brand):
-    number = item_query("product")
-    product = product_instance(number, brand)
+    product = product_instance(brand)
     # breakpoint()
     product.delete()
     print("product successfully deleted")
 
 def update_product(brand):
-    number = item_query("product")
-    product = product_instance(number,brand)
+    product = product_instance(brand)
     # breakpoint()
     try:
         product.name = input("updated name: ")
@@ -144,8 +166,7 @@ def update_product(brand):
     
 
 def view_product_details(brand):
-    number = item_query("product")
-    product = product_instance(number, brand)
+    product = product_instance(brand)
     clear_input_area()
     print(f'**********{product.name}**********\n',
             f'- name: {product.name}\n',

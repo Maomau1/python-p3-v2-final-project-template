@@ -26,8 +26,9 @@ def main():
     # initiate_brands()
     # initiate_products()
     clear_input_area()
+    home_page()
     while True:
-        home_page()
+        
         choice = input("> ")
         if choice == "e":
             exit_program()
@@ -36,10 +37,10 @@ def main():
         elif choice == "p":
             product_summary_page()
         else:
-            print("Invalid choice")
+            print("Invalid choice, try again")
 
 def home_page():
-    clear_input_area()
+    
     print("********************************************")
     print("*    Welcome to MR Rose - Inventory App    *")
     print("********************************************")
@@ -71,8 +72,8 @@ def brands_menu():
 
 
 def brands_page():
-    while True:
-        brands_menu()
+    brands_menu()
+    while True:    
         choice = input("> ")
         if choice == "e":
             exit_program()
@@ -87,13 +88,13 @@ def brands_page():
         elif choice == "d":
             delete_brand()
         else:
-            print("brands page Invalid choice")
+            print("Invalid choice, try again")
 
-def brand_menu(brand_number, brand):
+def brand_menu(brand):
     
     print("      *******************        ")
     print(f'---------   {brand.name}  -----------\n')
-    brand_products(brand_number)
+    brand_products(brand)
     print("\n---------------**---------------")
     print("Please choose from the following:\n")
     print("     Type a to Add a product")
@@ -104,21 +105,20 @@ def brand_menu(brand_number, brand):
     print("     Type e to Exit")
 
 def brand_page ():
-    brand_number = item_query("brand")
-    brand = brand_instance(brand_number)
+    brand = brand_instance()
     clear_input_area()
-    product_page(brand_number, brand)
+    product_page(brand)
 
 
-def product_page(brand_number, brand):
-    brand_menu(brand_number, brand)
+def product_page(brand):
+    brand_menu(brand)
     while True:    
         choice = input("> ")
         if choice == "e":
             exit_program()
         elif choice == "p":
             clear_input_area()
-            brand_menu(brand_number, brand)
+            brand_menu(brand)
         elif choice == "b":
             brands_page()
         elif choice == "a":
@@ -134,8 +134,8 @@ def product_page(brand_number, brand):
             view_product_details(brand)
             product_mini_menu(brand)
         else:
-            print("Product Error:  Invalid choice")
-            product_mini_menu(brand)
+            print("Invalid choice")
+           
         
 def product_mini_menu(brand):
     print(f'     Type p to go back to {brand.name} products page')
@@ -154,7 +154,7 @@ def product_summary_page():
         elif choice == "e":
             exit()
         else:
-            print("Product Error:  Invalid choice")
+            print("Invalid choice")
 
 if __name__ == "__main__":
     main()
